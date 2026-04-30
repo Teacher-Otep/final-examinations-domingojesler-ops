@@ -1,26 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     window.showSection = function(id){
-        document.querySelectorAll('.content').forEach(s=>s.style.display='none');
-        document.querySelector('.homecontent').style.display='none';
-        document.getElementById(id).style.display='block';
+        document.querySelectorAll('.content').forEach(s => s.style.display = 'none');
+        document.querySelector('.homecontent').style.display = 'none';
+        document.getElementById(id).style.display = 'block';
+
         const url = new URL(window.location);
         url.searchParams.set('section', id);
-        history.pushState({},'',url);
+        history.pushState({}, '', url);
     }
 
     document.getElementById('logo').onclick = () => {
-        document.querySelectorAll('.content').forEach(s=>s.style.display='none');
-        document.querySelector('.homecontent').style.display='block';
+        document.querySelectorAll('.content').forEach(s => s.style.display = 'none');
+        document.querySelector('.homecontent').style.display = 'block';
     }
 
-    window.clearFields = () => {
-        document.querySelectorAll('#create input').forEach(i=>i.value='');
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if(urlParams.get('status') == 'added'){
+        alert("✅ Student Successfully Added!");
     }
 
-    // --- UPDATE FUNCTIONALITY ---
+    if(urlParams.get('status') == 'error_id'){
+        alert("❌ ID already exists!");
+    }
+
+    if(urlParams.get('status') == 'error_name'){
+        alert("⚠️ Student name already exists!");
+    }
+
     $('#load_data_btn').click(function(){
         var student_id = $('#search_id').val();
+
         if(student_id == ''){
             alert("Please enter ID Number!");
             return;
@@ -32,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data: {id: student_id},
             success: function(response){
                 if(response == 'not_found'){
-                    alert("Student ID not found!");
+                    alert("Student not found!");
                     $('#update_form_area').html('');
                 } else {
                     $('#update_form_area').html(response);
@@ -41,9 +51,32 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- DELETE FUNCTIONALITY ---
+    $('#delete_id_input').on('keyup', function(){
+        var student_id = $(this).val();
+
+        if(student_id == ''){
+            $('#delete_student_info').html('');
+            return;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '../includes/fetch_student_display.php',
+            data: {id: student_id},
+            success: function(response){
+                if(response == 'not_found'){
+                    $('#delete_student_info').html('<p class="no-data">No student found.</p>');
+                } else {
+                    $('#delete_student_info').html(response);
+                }
+            }
+        });
+    });
+
+
     $('#delete_btn').click(function(){
         var student_id = $('#delete_id_input').val();
+
         if(student_id == ''){
             alert("Please enter ID Number!");
             return;
@@ -57,29 +90,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 success: function(response){
                     alert("✅ Student deleted successfully!");
                     $('#delete_id_input').val('');
+                    $('#delete_student_info').html('');
                 }
             });
         }
     });
 
-    // Number only validation
     $(document).on('input', 'input[type="text"]', function() {
         if($(this).hasClass('search-field') || $(this).attr('name') == 'id'){
             this.value = this.value.replace(/[^0-9]/g, '');
         }
     });
 
-    // Error Messages
-    const urlParams = new URLSearchParams(window.location.search);
-    if(urlParams.get('status') == 'error_id'){
-        alert("❌ Error: ID Number already exists! Use another ID.");
-    }
-    if(urlParams.get('status') == 'error_name'){
-        alert("⚠️ Warning: This student name already exists in the system!");
-    }
 
-    // Keep section active
     if(urlParams.get('section')){
         showSection(urlParams.get('section'));
     }
+
 });
