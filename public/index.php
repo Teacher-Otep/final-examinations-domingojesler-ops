@@ -17,7 +17,7 @@
     </div>
 </nav>
 <section class="homecontent">
-    <h1>WELCOME STUDENT SYSTEM</h1>
+    <h1>WELCOME STUDENT MANAGEMENT SYSTEM</h1>
 </section>
 <section id="create" class="content">
 <h2>Create Student</h2>
