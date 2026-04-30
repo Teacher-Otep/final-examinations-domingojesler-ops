@@ -8,7 +8,7 @@
 <body>
 
 <nav class="navbar">
-    <img src="images/logo.png" id="logo" alt="Logo">
+    <img src="../images/logo.png" id="logo" alt="Logo">
     <div class="navbar-buttons">
         <button class="navbarbuttons" onclick="showSection('create')">Create</button>
         <button class="navbarbuttons" onclick="showSection('read')">Read</button>
