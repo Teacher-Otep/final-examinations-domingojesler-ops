@@ -16,37 +16,36 @@
         <button class="navbarbuttons" onclick="showSection('delete')">Delete</button>
     </div>
 </nav>
+
 <section class="homecontent">
-    <h1>WELCOME STUDENT MANAGEMENT SYSTEM</h1>
+    <h1>WELCOME STUDENT SYSTEM</h1>
 </section>
 <section id="create" class="content">
 <h2>Create Student</h2>
-<form action="../includes/insert.php" method="POST" id="createForm">
+<form action="../includes/insert.php" method="POST">
     <label>ID Number</label>
-    <input type="text" name="id" class="field" placeholder="Enter ID Number" required><br>
+    <input type="text" name="id" class="field" required>
 
     <label>Surname</label>
-    <input name="surname" class="field" placeholder="Surname" required><br>
+    <input name="surname" class="field" required>
 
     <label>Name</label>
-    <input name="name" class="field" placeholder="Name" required><br>
+    <input name="name" class="field" required>
 
     <label>Middle Name</label>
-    <input name="middlename" class="field" placeholder="Middle Name"><br>
+    <input name="middlename" class="field">
 
     <label>Address</label>
-    <input name="address" class="field" placeholder="Address" required><br>
+    <input name="address" class="field" required>
 
     <label>Contact</label>
-    <input name="contact" class="field" placeholder="Contact" required><br>
+    <input name="contact" class="field" required>
 
     <div class="btn-group">
-        <button type="button" class="btn-clear" onclick="clearFields()">Clear</button>
         <button type="submit" class="btn-save">Save</button>
     </div>
 </form>
 </section>
-
 <section id="read" class="content">
 <h2>View Students</h2>
 <?php include '../includes/read.php'; ?>
@@ -63,27 +62,26 @@
 <?php endforeach; ?>
 </table>
 </section>
-
 <section id="update" class="content">
 <h2>Update Student</h2>
 
 <div class="search-container">
-    <input type="text" id="search_id" class="search-field" placeholder="Enter Student ID to load">
+    <input type="text" id="search_id" class="search-field">
     <button type="button" class="btn-load" id="load_data_btn">Load Data</button>
 </div>
 
 <div id="update_form_area"></div>
-
 </section>
 
 <section id="delete" class="content">
 <h2>Delete Student</h2>
 
 <div class="search-container">
-    <input type="text" id="delete_id_input" class="search-field" placeholder="Enter Student ID">
+    <input type="text" id="delete_id_input" class="search-field">
     <button type="button" class="btn-delete" id="delete_btn">Delete Student</button>
 </div>
 
+<div id="delete_student_info"></div>
 </section>
 
 <script src="script.js"></script>
