@@ -142,6 +142,39 @@ input[type=number] { -moz-appearance: textfield; }
     font-size: 16px;
 }
 
+#delete_student_info {
+    margin-top: 20px;
+}
+
+#delete_student_info {
+    margin-top: 20px;
+}
+
+.no-data {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+.student-preview {
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px solid #006400;
+    border-radius: 10px;
+    background: #f9fff9;
+}
+
+.student-preview h3 {
+    text-align: center;
+    color: #006400;
+    margin-bottom: 15px;
+}
+.no-data {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
 .btn-group {
     display: flex;
     gap: 20px;
